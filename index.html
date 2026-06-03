@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walker Brown — Custom Software Development</title>
+<meta name="description" content="Custom web apps and tools for small businesses. Built by Walker Brown, New Orleans.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #ffffff; --bg-secondary: #f5f5f3; --text: #1a1a1a; --text-secondary: #5a5a5a;
+    --text-tertiary: #999; --border: rgba(0,0,0,0.12); --border-med: rgba(0,0,0,0.18);
+    --radius-md: 8px; --radius-lg: 12px; --warning-bg: #fef9ec; --warning-text: #92600a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a; --bg-secondary: #242424; --text: #f0f0ee; --text-secondary: #aaa;
+      --text-tertiary: #666; --border: rgba(255,255,255,0.1); --border-med: rgba(255,255,255,0.18);
+      --warning-bg: #2a2010; --warning-text: #e0a040;
+    }
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2rem; border-bottom: 0.5px solid var(--border); }
+  .nav-name { font-size: 17px; font-weight: 500; }
+  .nav-cta { background: var(--text); color: var(--bg); border: none; padding: 8px 18px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; }
+  .hero { padding: 4rem 2rem 3rem; max-width: 680px; }
+  .hero-eyebrow { font-size: 13px; color: var(--text-tertiary); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1rem; }
+  h1 { font-size: 32px; font-weight: 500; line-height: 1.25; margin-bottom: 1.25rem; }
+  .hero-sub { font-size: 16px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 2rem; max-width: 520px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary { background: var(--text); color: var(--bg); border: none; padding: 11px 22px; border-radius: var(--radius-md); font-size: 15px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-block; }
+  .btn-secondary { background: transparent; color: var(--text); border: 0.5px solid var(--border-med); padding: 11px 22px; border-radius: var(--radius-md); font-size: 15px; cursor: pointer; text-decoration: none; display: inline-block; }
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 0 2rem; }
+  .section { padding: 3rem 2rem; max-width: 680px; }
+  .section-label { font-size: 12px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1.5rem; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .service-card { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 1.25rem; }
+  .service-icon { font-size: 20px; color: var(--text-secondary); margin-bottom: 10px; }
+  .service-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .service-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .proof-block { display: flex; flex-direction: column; gap: 16px; }
+  .proof-item { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+  .proof-item.soon { opacity: 0.65; border-style: dashed; }
+  .proof-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .proof-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .proof-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .proof-tag { display: inline-block; font-size: 11px; background: var(--bg-secondary); color: var(--text-secondary); padding: 3px 10px; border-radius: 20px; }
+  .proof-tag-soon { display: inline-block; font-size: 11px; background: var(--warning-bg); color: var(--warning-text); padding: 3px 10px; border-radius: 20px; }
+  .headroom-group { border: 0.5px dashed var(--border); border-radius: var(--radius-lg); overflow: hidden; opacity: 0.65; }
+  .headroom-header { padding: 0.85rem 1.25rem; background: var(--bg-secondary); border-bottom: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .headroom-label { font-size: 12px; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.04em; text-transform: uppercase; }
+  .headroom-sub { padding: 1.25rem; border-bottom: 0.5px solid var(--border); background: var(--bg); }
+  .headroom-sub:last-child { border-bottom: none; }
+  .about-text { font-size: 15px; color: var(--text-secondary); line-height: 1.8; max-width: 520px; }
+  .contact-box { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 2rem; max-width: 480px; }
+  .contact-box h2 { font-size: 18px; font-weight: 500; margin-bottom: 0.5rem; }
+  .contact-box p { font-size: 14px; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
+  .contact-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 14px; color: var(--text-secondary); }
+  .contact-link { color: var(--text); text-decoration: none; font-weight: 500; }
+  footer { padding: 1.5rem 2rem; border-top: 0.5px solid var(--border); font-size: 12px; color: var(--text-tertiary); }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Walker Brown</span>
+  <a class="nav-cta" href="#contact">Get in touch</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Custom software development</p>
+  <h1>Apps built for how your business actually works</h1>
+  <p class="hero-sub">I design and build custom web apps and tools for small businesses — no templates, no bloat. Just software that fits your operation.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#contact">Start a conversation ↓</a>
+    <a class="btn-secondary" href="#work">See my work</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section class="section">
+  <p class="section-label">What I build</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+      <p class="service-title">Web apps &amp; PWAs</p>
+      <p class="service-desc">Mobile-ready apps that work in any browser — no app store required.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-layout-dashboard" aria-hidden="true"></i></div>
+      <p class="service-title">Operations dashboards</p>
+      <p class="service-desc">Custom tools to manage scheduling, inventory, staff, and daily workflows.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-database" aria-hidden="true"></i></div>
+      <p class="service-title">Data &amp; reporting</p>
+      <p class="service-desc">Replace spreadsheets with real software that saves time and reduces errors.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="ti ti-plug" aria-hidden="true"></i></div>
+      <p class="service-title">Integrations</p>
+      <p class="service-desc">Connect your existing tools — POS, booking systems, email, and more.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="work">
+  <p class="section-label">Recent work</p>
+  <div class="proof-block">
+
+    <div class="proof-item">
+      <p class="proof-name">Pelican Club Ops</p>
+      <p class="proof-desc">A full operations platform for a French Quarter fine dining restaurant — staff scheduling, tip management, inventory tracking, floor plans, and daily reporting. Built from scratch to replace a patchwork of spreadsheets.</p>
+      <div class="proof-footer"><span class="proof-tag">Restaurant operations</span></div>
+    </div>
+
+    <div class="headroom-group">
+      <div class="headroom-header">
+        <span class="headroom-label">Headroom suite</span>
+        <span class="proof-tag-soon">Coming soon</span>
+      </div>
+      <div class="headroom-sub">
+        <p class="proof-name">Headroom</p>
+        <p class="proof-desc">A hospitality operations platform for venues of any size — scheduling, staff management, inventory, and data-driven projections powered by live market data.</p>
+        <div class="proof-footer"><span class="proof-tag">Hospitality SaaS</span></div>
+      </div>
+      <div class="headroom-sub">
+        <p class="proof-name">StaffSide by Headroom</p>
+        <p class="proof-desc">A standalone app for hospitality workers — tip tracking, schedule management, and a liquor and cocktail reference database. Available independently, connects seamlessly with Headroom venues.</p>
+        <div class="proof-footer"><span class="proof-tag">Staff-facing app</span></div>
+      </div>
+      <div class="headroom-sub">
+        <p class="proof-name">Area Pulse</p>
+        <p class="proof-desc">A daily data scrape of the New Orleans dining market used to model one-to-two year business projections. Powers the scheduling and forecasting engine inside Headroom.</p>
+        <div class="proof-footer"><span class="proof-tag">Market data</span></div>
+      </div>
+    </div>
+
+    <div class="proof-item soon">
+      <p class="proof-name">Living World</p>
+      <p class="proof-desc">A running simulation that generates its own mythology in real time. Autonomous agents, procedurally generated terrain, and a daily chronicle that no one authors. A new kind of thing.</p>
+      <div class="proof-footer"><span class="proof-tag-soon">Coming soon</span></div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <p class="section-label">About</p>
+  <p class="about-text">I'm a restaurant manager and self-taught developer based in New Orleans. I started building software because the tools available didn't fit how real operations work. That background — managing kitchens, front-of-house, inventory, and staff — shapes everything I build. I understand your problems because I've had them too.</p>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="contact">
+  <p class="section-label">Contact</p>
+  <div class="contact-box">
+    <h2>Let's talk about your project</h2>
+    <p>Tell me what you're trying to solve. No commitment — just a conversation about what's possible.</p>
+    <div class="contact-row">
+      <i class="ti ti-mail" aria-hidden="true"></i>
+      <a class="contact-link" href="mailto:walkertbrown@gmail.com">walkertbrown@gmail.com</a>
+    </div>
+    <div class="contact-row">
+      <i class="ti ti-brand-linkedin" aria-hidden="true"></i>
+      <a class="contact-link" href="https://linkedin.com/in/walkertbrown" target="_blank" rel="noopener">LinkedIn — Walker Brown</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Walker Brown &middot; New Orleans, LA
+</footer>
+
+</body>
+</html>
